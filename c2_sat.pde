@@ -8,10 +8,10 @@ class Satelite {
   Satelite(String satID)
   {
     this.ID = satID;
-    getJ(this,satID);
+    getJ(this, satID);
     getAvg();
   }
-  
+
   void getAvg()
   {
     float latDiffSum = 0;
@@ -26,6 +26,4 @@ class Satelite {
     this.avgIncLat = latDiffSum / posList.length;
     this.avgIncLon = lonDiffSum / posList.length;
   }
-  
-  
 }

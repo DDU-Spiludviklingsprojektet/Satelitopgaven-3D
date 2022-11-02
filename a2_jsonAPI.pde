@@ -1,7 +1,7 @@
-void getJ(Satelite sat, String satID)
-{
-  if (satID.length() <=0) 
-      {satID = "25544";}
+void getJ(Satelite sat, String satID) {
+  if (satID.length() <=0) {
+    satID = "25544";
+  }
 
   String api = "M9GF6D-XSLVGS-LZ2YYR-4Y5P";
   int requests = 2;
@@ -38,15 +38,18 @@ void getJ(Satelite sat, String satID)
    ]
    }
    */
+   
+   
   JSONObject info = json.getJSONObject("info");
   sat.satName = info.getString("satname");
   JSONArray posArr = json.getJSONArray("positions");
   Position[] posList = new Position[posArr.size()];
-  for (int i = 0; i < posArr.size(); i++)
-  {
+  
+  for (int i = 0; i < posArr.size(); i++) {
     JSONObject jPos = posArr.getJSONObject(i);
     Position pos = new Position(jPos);
     posList[i] = pos;
   }
+  
   sat.posList = posList;
 }
