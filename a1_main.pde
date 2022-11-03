@@ -11,20 +11,24 @@ Satelite hi;
 
 PShape globe;
 PImage earth;
+PImage Space;
 float angle;
+
 
 void setup (){
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
   
+ 
+  dialog.setProgress(10);
+  
   fullScreen (P3D);
-  background (0);
-  earth = loadImage("earth.jpg" );
+  Space = loadImage ("data/space.jpg");
+  background (Space);
+  earth = loadImage("data/earth.jpg" );
   globe = createShape (SPHERE, 230);
   globe.setTexture (earth);  
   globe.setStroke (false);
   
-  dialog.setProgress(10);
-
   hi = new Satelite("");
   println(hi.satName);
   
