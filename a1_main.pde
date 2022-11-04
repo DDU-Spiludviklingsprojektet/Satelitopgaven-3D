@@ -21,11 +21,11 @@ void setup (){
  
   dialog.setProgress(10);
   
-  fullScreen (P3D);
+  size (1920,1000,P3D);
   Space = loadImage ("data/Space.jpg");
   Space.resize(width, height);
   background (Space);
-  earth = loadImage("data/Earth.jpg" );
+  earth = loadImage("data/earth.jpg" );
   globe = createShape (SPHERE, 230);
   globe.setTexture (earth);  
   globe.setStroke (false);
