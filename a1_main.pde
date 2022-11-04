@@ -22,9 +22,10 @@ void setup (){
   dialog.setProgress(10);
   
   fullScreen (P3D);
-  Space = loadImage ("data/space.jpg");
+  Space = loadImage ("data/Space.jpg");
+  Space.resize(width, height);
   background (Space);
-  earth = loadImage("data/earth.jpg" );
+  earth = loadImage("data/Earth.jpg" );
   globe = createShape (SPHERE, 230);
   globe.setTexture (earth);  
   globe.setStroke (false);
