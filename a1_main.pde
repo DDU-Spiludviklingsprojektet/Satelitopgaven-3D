@@ -13,6 +13,7 @@ PShape globe;
 PImage earth;
 PImage Space;
 float angle;
+float angleX;
 
 
 void setup (){
@@ -31,7 +32,7 @@ void setup (){
   globe.setStroke (false);
   
   hi = new Satelite("");
-  println(hi.satName);
+  angleX = 0;
   
   
   delay(1000);
@@ -47,10 +48,34 @@ void setup (){
 
 void draw() {
   translate(width/2, height/2);
+  input();
   rotateY (angle);
-  angle += 0.005;
+  //rotateX (angleX);
+ // angle += 0.005;
   shape (globe);
 
 
   
+}
+
+void input()
+{
+  if (keyPressed){
+  switch(keyCode){
+  case 37: //Left
+    angle -= 0.005;
+    break;
+  case 39: // right
+    angle += 0.005;
+    break;
+    /*
+  case 38: // up
+    angleX += 0.005;
+    break;
+  case 40: //down
+    angleX -= 0.005;
+    break;
+    */
+  }
+  }
 }
