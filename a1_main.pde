@@ -12,73 +12,63 @@ Satelite hi;
 PeasyCam cam;
 
 PShape globe;
+PShape space;
 PImage earth;
 PImage Space;
-float angle;
-float angleX;
 
 
-void setup (){
+void setup () {
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
-  
- 
+
+
   dialog.setProgress(10);
-  
-  cam = new PeasyCam(this, 100);
-  cam.setMinimumDistance(50);
-  cam.setMaximumDistance(500);
 
-  size (1920, 1080, P3D);
+  cam = new PeasyCam(this, 700);
+  cam.setMinimumDistance(350);
+  cam.setMaximumDistance(3000);
+
+  fullScreen (P3D);
+
   Space = loadImage ("data/Space.jpg");
-  Space.resize(width, height);
   earth = loadImage("data/earth.jpg" );
-  
-  
+
+  globe = createShape (SPHERE, 230);
+  globe.setTexture (earth);
+  globe.setStroke (false);
 
 
-  
+  space = createShape (SPHERE, 4000);
+  space.setTexture (Space);
+  space.setStroke (false);
+
+
   hi = new Satelite("");
-  angleX = 0;
-  
-  
+
   delay(1000);
-  
+
   dialog.setProgress(120);
-  
+
   dialog.setMessage("Ready");
   delay(1000);
-  
+
   dialog.close();
-  
 }
 
 void draw() {
 
+  pushMatrix();
+  
+  translate(0, 0, 0);
+  shape (globe);
+  shape (space);
 
-    background (0);
-    rotateX(-.5);
-    rotateY(-.5);
-    pushMatrix();
-    translate(width/2, height/2);
-    globe = createShape (SPHERE, 230);
-    globe.setTexture (earth);  
-    globe.setStroke (false);;
-    shape (globe);
-    popMatrix();    
-}
+  translate(0, 0, 2550);
+  sphere (40);
+  noStroke ();
+  fill (128, 128, 128);
 
 
 
 
-void input()  {
-  if (keyPressed){
-  switch(keyCode){
-  case 37: //Left
-    angle -= 0.05;
-    break;
-  case 39: // right
-    angle += 0.05;
-    break;
-  }
- }
+  popMatrix();
 }
