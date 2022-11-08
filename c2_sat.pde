@@ -18,16 +18,19 @@ class Satelite {
   }
 
   void drawSat(float x, float y, float z){
-    
+  
     pushMatrix();
     stroke(satColor);
      rotateZ(rotZ);
-     rotateX(rotZ);
-    
+     rotateX(rotX);
+   
+
     translate(x,y,z);
+
     fill(255);
     box(10);
     popMatrix();
+
    this.orbitalDraw();
   }
   
@@ -36,7 +39,7 @@ class Satelite {
      pushMatrix();
  
      rotateZ(rotZ);
-     rotateX(rotZ);
+     rotateX(rotX);
   
   beginShape();
         noFill();
