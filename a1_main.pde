@@ -17,6 +17,7 @@ PImage earth;
 PImage Space;
 
 
+
 void setup () {
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
 
@@ -40,7 +41,7 @@ void setup () {
   space = createShape (SPHERE, 4000);
   space.setTexture (Space);
   space.setStroke (false);
-
+  
 
   hi = new Satelite("");
 
@@ -56,19 +57,28 @@ void setup () {
 
 void draw() {
 
+// Contructer vores jord klode og rum
   pushMatrix();
-  
   translate(0, 0, 0);
   shape (globe);
   shape (space);
-
   translate(0, 0, 2550);
   sphere (40);
   noStroke ();
   fill (128, 128, 128);
-
-
-
-
   popMatrix();
+  
+  cam.beginHUD();
+
+  textSize(40);
+  rectMode (CORNER);
+  fill (255, 255, 255);
+  text ("Vi skal lige skrive den der", 30, 50);
+  text ("Satelit information her", 30, 90);
+
+  cam.endHUD();
+  
+
+  
+  
 }
