@@ -3,7 +3,7 @@ void getJ(Satelite sat, String satID) {
   if (satID.length() <=0) {
     satID = "25544";
   }
-
+  sat.ID = satID;
   String api = "M9GF6D-XSLVGS-LZ2YYR-4Y5P";
   int requests = 2;
   JSONObject json = loadJSONObject("https://api.n2yo.com/rest/v1/satellite/positions/"+satID+"/41.702/-76.014/0/"+str(requests)+"/&apiKey="+api);

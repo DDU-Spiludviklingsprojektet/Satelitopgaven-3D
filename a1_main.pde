@@ -8,14 +8,15 @@ import peasy.*;
 
 
 
-Satelite hi;
+Satelite sat1;
+Satelite sat2;
 PeasyCam cam;
 
 PShape globe;
 PShape space;
 PImage earth;
 PImage Space;
-
+float animeTest; // test variabel
 
 
 void setup () {
@@ -43,7 +44,8 @@ void setup () {
   space.setStroke (false);
   
 
-  hi = new Satelite("");
+  sat1 = new Satelite("25544",PI/8,PI/6);
+  sat2 = new Satelite("36516",PI,PI);
 
   delay(1000);
 
@@ -53,6 +55,7 @@ void setup () {
   delay(1000);
 
   dialog.close();
+  animeTest = 0;
 }
 
 void draw() {
@@ -75,10 +78,19 @@ void draw() {
   fill (255, 255, 255);
   text ("Vi skal lige skrive den der", 30, 50);
   text ("Satelit information her", 30, 90);
-
+  fill(sat1.satColor);
+  text (sat1.ID, 30, 120);
+  fill(sat2.satColor);
+  text (sat2.ID, 30, 150);
+  fill(128, 128, 128);
   cam.endHUD();
   
-
   
+ 
+  
+   sat1.drawSat(cos(PI*animeTest)*260,0,sin(PI*animeTest)*260);
+   sat2.drawSat(cos(PI*animeTest)*260,0,sin(PI*animeTest)*260);
+   
+  animeTest += 0.001;
   
 }

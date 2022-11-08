@@ -4,26 +4,50 @@ class Satelite {
   String ID;
   float avgIncLat;
   float avgIncLon;
+  color satColor;
+  float rotZ;
+  float rotX;
 
-  Satelite(String satID)
+  Satelite(String satID, float rotX, float rotZ)
   {
     this.ID = satID;
     getJ(this, satID);
-    getAvg();
+    satColor = color(random(70,200),random(70,200),random(70,200));
+    this.rotX = rotX;
+    this.rotZ = rotZ;
   }
 
-  void getAvg()
-  {
-    float latDiffSum = 0;
-    float lonDiffSum = 0;
-    for (int i = 0; i < posList.length -1; i++)
-    {
-      Position pos1 = posList[i];
-      Position pos2 = posList[i+1];
-      latDiffSum += pos2.lat - pos1.lat;
-      lonDiffSum += pos2.lon - pos1.lon;
-    }
-    this.avgIncLat = latDiffSum / posList.length;
-    this.avgIncLon = lonDiffSum / posList.length;
+  void drawSat(float x, float y, float z){
+    
+    pushMatrix();
+    stroke(satColor);
+     rotateZ(rotZ);
+     rotateX(rotZ);
+    
+    translate(x,y,z);
+    fill(255);
+    box(10);
+    popMatrix();
+   this.orbitalDraw();
+  }
+  
+  void orbitalDraw(){
+    
+     pushMatrix();
+ 
+     rotateZ(rotZ);
+     rotateX(rotZ);
+  
+  beginShape();
+        noFill();
+        
+        strokeWeight(6);
+        for(int i = 1; i< 24; i++) {
+            curveVertex((230 + 30) * sin(0.1*PI*i), 0, (230+30) * cos(0.1*PI*i));
+        }
+        endShape();
+
+  popMatrix();
+    
   }
 }
