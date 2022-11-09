@@ -7,60 +7,49 @@ class Satelite {
   float rotX;
   float scale;
   float alt;
-  float lat;
-  float lon;
   float rotY;
-  float animeTest;
 
   Satelite(String satID,float scale)
   {
     this.ID = satID;
-    getJ(this, satID);
+    getJ(this, satID); // downloader satelittens data med den selv som argument
     satColor = color(random(70,200),random(70,200),random(70,200));
     this.scale = scale;
     calcRot();
   }
 
-void calcRot(){
+void calcRot(){ // udregner rotation, idet satellittens bane tegnes om ækvator og drejes bagefter.
   PVector diff = PVector.sub(posList[1],posList[0]);
-  //PVector diff = this.posList[0].get();
   this.rotZ = atan(diff.y/diff.x);
   this.rotX = -atan(diff.y/diff.z); 
-  this.rotY = -atan(diff.z/diff.x);  //virker ikke?
- println(rotX,rotY,rotZ);
+  this.rotY = -atan(diff.z/diff.x);  
+
   
    
 }
 
 
-  void drawSat(){
+  void drawSat(){ // tegner sattelittes i det første punkt som blev sendt tilbage fra JSON dataen
   
     pushMatrix();
     stroke(satColor);
-   // rotateZ(rotZ);
-    //rotateX(rotX);
-    //rotateY(PI);
-
-    //translate(posList[0].x*0.5*scale+scale,posList[0].y*0.5*scale+scale,posList[0].z*0.5*scale+scale);
-    
     translate(this.posList[0].x,this.posList[0].y,this.posList[0].z);
 
     fill(255);
     box(10);
     popMatrix();
 
-   this.orbitalDraw();
+   this.orbitalDraw(); // tegner orbital/kredsløb
   }
   
   void orbitalDraw(){
     
      pushMatrix();
- 
     rotateZ(rotZ);
      rotateX(rotX);
      rotateY(rotY);
   
-  beginShape();
+  beginShape(); // danner en cirkel ud fra en masse punkter med satellittens altitude som radius.
         noFill();
         
         strokeWeight(6);

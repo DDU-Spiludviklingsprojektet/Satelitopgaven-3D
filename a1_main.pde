@@ -16,20 +16,19 @@ PShape globe;
 PShape space;
 PImage earth;
 PImage Space;
-float animeTest = 0; // test variabel
 float scale;
 String sat_input;
 String[] satIDArr;
 Satelite[] satArr;
 
 void setup () {
-  scale =0.01*width/1920; //
+  scale = 0.01*width/1920; // skalaen, afhænger af skærmstørrelse
 
 satIDArr = new String[2];
 satIDArr[0] = "25544";
 satIDArr[1] = "36516";
   
-  satArr = new Satelite[2];
+  satArr = new Satelite[2]; // laver en ny satelit for hvert ID.
   
   for (int i = 0; i < satIDArr.length; i++){
     satArr[i] = new Satelite(satIDArr[i],scale);
@@ -41,7 +40,7 @@ satIDArr[1] = "36516";
   dialog.setProgress(10);
   dialog.setMessage("Loading cam");
   cam = new PeasyCam(this, 700);
-  cam.setMinimumDistance(350);
+  cam.setMinimumDistance(300);
   cam.setMaximumDistance(3000);
   fullScreen (P3D);
 
@@ -103,16 +102,9 @@ void draw() {
     
   }
    cam.endHUD();
+
   
-  
-  /*
-  fill(sat2.satColor);
-  rect (30, 67, 20, 20);
-  fill (255, 255, 255);
-  text (sat2.satName, 60, 90);
- */
-  
-    // Ekvator
+    // ækvator
    beginShape();
         noFill();
         stroke(255);

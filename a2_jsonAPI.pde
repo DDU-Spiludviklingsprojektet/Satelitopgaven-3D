@@ -18,10 +18,8 @@ void getJ(Satelite sat, String satID) {
    float lon = posArr.getJSONArray(i).getFloat(1)/1000;
    float alt = posArr.getJSONArray(i).getFloat(2)/1000;
     posList[i] = convert(lat, lon, 6371*scale+alt*scale);
-    println(posList[i],alt);
     sat.alt = alt;
-    sat.lat = lat;
-    sat.lon = lon;
+    
   }
   sat.posList = posList;
 }
