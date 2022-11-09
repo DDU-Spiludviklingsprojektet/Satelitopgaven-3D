@@ -20,7 +20,7 @@ class Satelite {
 void calcRot(){
   PVector diff = PVector.sub(posList[1],posList[0]);
   this.rotZ = atan(diff.y/diff.x);
-  this.rotX = -1 *atan(diff.y/diff.x); 
+  this.rotX = atan(diff.y/diff.x); 
   
 }
 
@@ -29,13 +29,13 @@ void calcRot(){
   
     pushMatrix();
     stroke(satColor);
-     //rotateZ(rotZ);
-     //rotateX(rotX);
+     rotateZ(rotZ);
+     rotateX(rotX);
    
 
     //translate(posList[0].x*0.5*scale+scale,posList[0].y*0.5*scale+scale,posList[0].z*0.5*scale+scale);
     
-    //translate(,alt*scale,alt);
+    translate(alt*scale+scale*(6.371*1000000),0,alt+scale*(6.371*1000000));
 
     fill(255);
     box(10);

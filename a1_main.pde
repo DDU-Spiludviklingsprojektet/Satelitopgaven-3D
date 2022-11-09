@@ -22,10 +22,10 @@ String sat_input;
 
 
 void setup () {
-  sat_input = new UiBooster().showTextInputDialog("Hvilke satteliter vil du tracke: (satelit id)");
-  String[] sat_arr = sat_input.split(", ");
+ // sat_input = new UiBooster().showTextInputDialog("Hvilke satteliter vil du tracke: (satelit id)");
+ // String[] sat_arr = sat_input.split(", ");
   
-  printArray(sat_arr);
+  //printArray(sat_arr);
 
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
 
