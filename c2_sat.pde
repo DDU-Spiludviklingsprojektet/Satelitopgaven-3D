@@ -25,7 +25,7 @@ void calcRot(){
   //PVector diff = this.posList[0].get();
   this.rotZ = atan(diff.y/diff.x);
   this.rotX = -atan(diff.y/diff.z); 
-  //this.rotY = atan(diff.z/diff.x);  //virker ikke?
+  this.rotY = atan(diff.z/diff.x);  //virker ikke?
  println(rotX,rotY,rotZ);
   
    
@@ -55,19 +55,20 @@ void calcRot(){
     
      pushMatrix();
  
-    //rotateZ(rotZ);
-     //rotateX(rotX);
-     //rotateY(guh);
+    rotateZ(rotZ);
+     rotateX(rotX);
+     rotateY(rotY);
   
   beginShape();
         noFill();
         
         strokeWeight(6);
+        
         for(int i = 1; i< 24; i++) { 
           float h = 6371*scale+alt*scale;
            //PVector guh = convert(this.lat+0.1*PI*i,this.lon+0.1*PI*i,h);
-            
-          float theta = lat +0.1*PI*i;//-radians(10);
+            /*
+          float theta = lat;// +0.1*PI*i;//-radians(10);
           float phi = lon + PI +0.1*PI*i;
 
   // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
@@ -75,8 +76,8 @@ void calcRot(){
             float y = -h * sin(theta);
             float z = -h * cos(theta) * sin(phi);
            curveVertex(x,y,z);
-          
-           // old: curveVertex((alt+6371)*scale * sin(0.1*PI*i), 0, (alt+(6371))*scale * cos(0.1*PI*i));
+          */
+           curveVertex((alt+6371)*scale * sin(0.1*PI*i), 0, (alt+(6371))*scale * cos(0.1*PI*i));
         }
         endShape();
 
