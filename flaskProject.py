@@ -5,24 +5,6 @@ import json, urllib.request, ephem
 from datetime import datetime
 import datetime as dt
 
-app = Flask(__name__)
-print(calculate(100))
-
-@app.route('/api/<id>', methods=['GET'])
-def post(id):
-    idList = id.split("-")
-    print(idList)
-    data = {}
-    for x in idList:
-        print(x)
-        data[x] = calculate(x)
-    print(data)
-    return jsonify(data)
-
-
-app.run(host="0.0.0.0", port=5000)
-
-
 def calculate(satnumber):
     with urllib.request.urlopen("https://api.n2yo.com/rest/v1/satellite/tle/"+satnumber+"&apiKey=M9GF6D-XSLVGS-LZ2YYR-4Y5P") as url:
         data = json.load(url)
@@ -49,3 +31,23 @@ def calculate(satnumber):
         positions.append((tle_rec.sublong,tle_rec.sublat,tle_rec.elevation))
 
     return positions
+
+
+app = Flask(__name__)
+print(calculate(100))
+
+@app.route('/api/<id>', methods=['GET'])
+def post(id):
+    idList = id.split("-")
+    print(idList)
+    data = {}
+    for x in idList:
+        print(x)
+        data[x] = calculate(x)
+    print(data)
+    return jsonify(data)
+
+
+app.run(host="0.0.0.0", port=5000)
+
+
