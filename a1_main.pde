@@ -16,7 +16,7 @@ PShape globe;
 PShape space;
 PImage earth;
 PImage Space;
-float animeTest; // test variabel
+float animeTest = 0; // test variabel
 float scale;
 String sat_input;
 
@@ -27,45 +27,48 @@ void setup () {
   
   //printArray(sat_arr);
 
+  scale =  (width/20)/(6.371*1000000); //pixel/km
+
+//Setup for can and progress bar
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
-
-
   dialog.setProgress(10);
-
+  dialog.setMessage("Loading cam");
   cam = new PeasyCam(this, 700);
   cam.setMinimumDistance(350);
   cam.setMaximumDistance(3000);
-
   fullScreen (P3D);
 
+//Loading images
+  dialog.setProgress(40);
+  dialog.setMessage("Loading Images");
   Space = loadImage ("data/Space.jpg");
   earth = loadImage("data/earth.jpg" );
 
 
-  scale =  (width/20)/(6.371*1000000); //pixel/km
-
+  dialog.setProgress(70);
+  dialog.setMessage("Loading shapes");
+//setup for globe
   globe = createShape (SPHERE, scale*(6.371*1000000));
   globe.setTexture (earth);
   globe.setStroke (false);
-
-
+//Setup for space
   space = createShape (SPHERE, 4000);
   space.setTexture (Space);
   space.setStroke (false);
 
 
-  sat1 = new Satelite("25544",scale);
-  sat2 = new Satelite("36516",scale);
+//Setup for satelite
+  dialog.setProgress(90);
+  dialog.setMessage("Loading satelites");
+  sat1 = new Satelite("25544", PI/8, PI/6);
+  sat2 = new Satelite("36516", PI, PI);
 
-  delay(1000);
 
-  dialog.setProgress(120);
-
+//Progress bar done
+  dialog.setProgress(100);
   dialog.setMessage("Ready");
   delay(1000);
-
   dialog.close();
-  animeTest = 0;
 }
 
 void draw() {
