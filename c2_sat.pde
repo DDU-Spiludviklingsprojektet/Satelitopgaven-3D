@@ -24,8 +24,8 @@ void calcRot(){
   PVector diff = PVector.sub(posList[1],posList[0]);
   //PVector diff = this.posList[0].get();
   this.rotZ = atan(diff.y/diff.x);
-  this.rotX = -atan(diff.y/diff.z); 
-  this.rotY = atan(diff.z/diff.x); 
+  this.rotX = -atan(diff.y/diff.z)+PI/2; 
+  this.rotY = atan(diff.z/diff.x);  //virker ikke?
   println(rotX,rotY,rotZ);
   
    
