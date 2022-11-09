@@ -42,10 +42,10 @@ void setup () {
   space = createShape (SPHERE, 4000);
   space.setTexture (Space);
   space.setStroke (false);
-  
 
-  sat1 = new Satelite("25544",PI/8,PI/6);
-  sat2 = new Satelite("36516",PI,PI);
+
+  sat1 = new Satelite("25544", PI/8, PI/6);
+  sat2 = new Satelite("36516", PI, PI);
 
   delay(1000);
 
@@ -59,38 +59,38 @@ void setup () {
 }
 
 void draw() {
-
-// Contructer vores jord klode og rum
+  //draws globe and the space around
   pushMatrix();
   translate(0, 0, 0);
   shape (globe);
   shape (space);
-  translate(0, 0, 2550);
-  sphere (40);
-  noStroke ();
-  fill (128, 128, 128);
   popMatrix();
-  
+
+  //draws the satelites and the trajectory
+  sat1.drawSat(cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260);
+  sat2.drawSat(cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260);
+
+  animeTest += 0.001;
+
+  //draws the GUI with the information about the satelites
   cam.beginHUD();
 
+  fill(64, 64, 64);
+  stroke (128, 128, 128);
+  rect (15, 12, 200, 90, 20, 20, 20, 20);
+
+  noStroke();
   textSize(40);
-  rectMode (CORNER);
-  fill (255, 255, 255);
-  text ("Vi skal lige skrive den der", 30, 50);
-  text ("Satelit information her", 30, 90);
+
   fill(sat1.satColor);
-  text (sat1.ID, 30, 120);
+  rect (30, 27, 20, 20);
+  fill (255, 255, 255);
+  text (sat1.ID, 60, 50);
+
   fill(sat2.satColor);
-  text (sat2.ID, 30, 150);
-  fill(128, 128, 128);
+  rect (30, 67, 20, 20);
+  fill (255, 255, 255);
+  text (sat2.ID, 60, 90);
+
   cam.endHUD();
-  
-  
- 
-  
-   sat1.drawSat(cos(PI*animeTest)*260,0,sin(PI*animeTest)*260);
-   sat2.drawSat(cos(PI*animeTest)*260,0,sin(PI*animeTest)*260);
-   
-  animeTest += 0.001;
-  
 }
