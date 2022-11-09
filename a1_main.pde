@@ -16,52 +16,49 @@ PShape globe;
 PShape space;
 PImage earth;
 PImage Space;
-float animeTest; // test variabel
+float animeTest = 0; // test variabel
 String sat_input;
 
 
 void setup () {
   sat_input = new UiBooster().showTextInputDialog("Hvilke satteliter vil du tracke: (satelit id)");
   String[] sat_arr = sat_input.split(", ");
-  
   printArray(sat_arr);
 
+
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
-
-
   dialog.setProgress(10);
-
+  dialog.setMessage("Loading cam");
   cam = new PeasyCam(this, 700);
   cam.setMinimumDistance(350);
   cam.setMaximumDistance(3000);
-
   fullScreen (P3D);
 
+
+  dialog.setProgress(40);
+  dialog.setMessage("Loading Images");
   Space = loadImage ("data/Space.jpg");
   earth = loadImage("data/earth.jpg" );
 
+  dialog.setProgress(70);
+  dialog.setMessage("Loading shapes");
   globe = createShape (SPHERE, 230);
   globe.setTexture (earth);
   globe.setStroke (false);
-
 
   space = createShape (SPHERE, 4000);
   space.setTexture (Space);
   space.setStroke (false);
 
-
+  dialog.setProgress(90);
+  dialog.setMessage("Loading satelites");
   sat1 = new Satelite("25544", PI/8, PI/6);
   sat2 = new Satelite("36516", PI, PI);
 
-  delay(1000);
-
-  dialog.setProgress(120);
-
+  dialog.setProgress(100);
   dialog.setMessage("Ready");
   delay(1000);
-
   dialog.close();
-  animeTest = 0;
 }
 
 void draw() {
