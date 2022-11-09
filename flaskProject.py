@@ -6,15 +6,17 @@ from datetime import datetime
 import datetime as dt
 
 app = Flask(__name__)
-
+print(calculate(100))
 
 @app.route('/api/<id>', methods=['GET'])
-def post(id, speed):
+def post(id):
     idList = id.split("-")
-    calculate()
+    print(idList)
     data = {}
     for x in idList:
+        print(x)
         data[x] = calculate(x)
+    print(data)
     return jsonify(data)
 
 
