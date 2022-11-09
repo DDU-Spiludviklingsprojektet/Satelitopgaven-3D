@@ -81,16 +81,16 @@ void draw() {
   cam.beginHUD();
   fill(64, 64, 64);
   stroke (128, 128, 128);
-  rect (15, 12, 200, 90, 20, 20, 20, 20);
+  rect (15, 12, 330, 90, 20);
   noStroke();
   textSize(40);
   fill(sat1.satColor);
   rect (30, 27, 20, 20);
   fill (255, 255, 255);
-  text (sat1.ID, 60, 50);
+  text (sat1.satName, 60, 50);
   fill(sat2.satColor);
   rect (30, 67, 20, 20);
   fill (255, 255, 255);
-  text (sat2.ID, 60, 90);
+  text (sat2.satName, 60, 90);
   cam.endHUD();
 }
