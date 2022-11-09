@@ -27,7 +27,7 @@ void setup () {
   
   //printArray(sat_arr);
 
-  scale =  (width/20)/(6.371*1000000); //pixel/km
+  scale =0.01*width/1920; //
 
 //Setup for can and progress bar
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
@@ -48,7 +48,7 @@ void setup () {
   dialog.setProgress(70);
   dialog.setMessage("Loading shapes");
 //setup for globe
-  globe = createShape (SPHERE, scale*(6.371*1000000));
+  globe = createShape (SPHERE, 6371*scale);
   globe.setTexture (earth);
   globe.setStroke (false);
 //Setup for space
@@ -60,8 +60,8 @@ void setup () {
 //Setup for satelite
   dialog.setProgress(90);
   dialog.setMessage("Loading satelites");
-  sat1 = new Satelite("25544", PI/8, PI/6);
-  sat2 = new Satelite("36516", PI, PI);
+  sat1 = new Satelite("25544", scale);
+  sat2 = new Satelite("36516",scale);
 
 
 //Progress bar done

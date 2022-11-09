@@ -35,7 +35,7 @@ void calcRot(){
 
     //translate(posList[0].x*0.5*scale+scale,posList[0].y*0.5*scale+scale,posList[0].z*0.5*scale+scale);
     
-    translate(alt*scale+scale*(6.371*1000000),0,alt+scale*(6.371*1000000));
+    translate((this.posList[1].x+6371+alt)*scale*(1-0.13*PI),0,(this.posList[1].z+6371+alt)*scale*(1-0.08*PI));
 
     fill(255);
     box(10);
@@ -55,8 +55,8 @@ void calcRot(){
         noFill();
         
         strokeWeight(6);
-        for(int i = 1; i< 24; i++) { // this.scale*10 + 
-            curveVertex((alt*scale+scale*(6.371*1000000)) * sin(0.1*PI*i), 0, (alt*scale+scale*(6.371*1000000)) * cos(0.1*PI*i));
+        for(int i = 1; i< 24; i++) { 
+            curveVertex((alt+6371)*scale * sin(0.1*PI*i), 0, (alt+(6371))*scale * cos(0.1*PI*i));
         }
         endShape();
 

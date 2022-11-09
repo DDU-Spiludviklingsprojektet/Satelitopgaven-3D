@@ -50,6 +50,7 @@ void getJ(Satelite sat, String satID) {
     JSONObject jPos = posArr.getJSONObject(i);
      sat.alt = jPos.getFloat("sataltitude");
     posList[i] = convert(jPos.getFloat("satlatitude"),jPos.getFloat("sataltitude"),jPos.getFloat("satlongitude"));
+    println(posList[i],jPos.getFloat("sataltitude"));
   }
   
   sat.posList = posList;
@@ -63,7 +64,8 @@ PVector convert(float lat, float lon, float h ) {
   float x = h * cos(theta) * cos(phi);
   float y = -h * sin(theta);
   float z = -h * cos(theta) * sin(phi);
-
+  
   return new PVector(x, y, z);
+  
 
 }
