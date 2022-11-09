@@ -33,12 +33,12 @@ def calculate(satnumber):
     #Creating a list of the coordinates and altitudes
     positions = []
     #appends the name of the object to the start of the list.
-    positions.append(name)
+    #positions.append(name)
     for t in timelist:
         tle_rec.compute(t)
         positions.append((tle_rec.sublong,tle_rec.sublat,tle_rec.elevation))
     
-    return positions
+    return positions,name
 
 app = Flask(__name__)
 
@@ -48,7 +48,9 @@ def post(id):
     idList = id.split("-")
     data = {}
     for x in idList:
-        data[x] = calculate(x)
+        positions, name = calculate(x)
+        data["Name"] = name
+        data["pos"] = positions
     return jsonify(data)
 
 app.run(host="0.0.0.0", port=5000)
