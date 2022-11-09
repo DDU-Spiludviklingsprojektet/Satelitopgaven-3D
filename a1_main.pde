@@ -106,4 +106,17 @@ void draw() {
   text (sat2.ID, 60, 90);
 
   cam.endHUD();
+  
+
+   beginShape();
+        noFill();
+        stroke(255);
+        strokeWeight(3);
+        for(int i = 1; i< 24; i++) { 
+            curveVertex((430+6371)*scale * sin(0.1*PI*i), 0, (430+(6371))*scale * cos(0.1*PI*i));
+        }
+        endShape();
+
+  
+  
 }

@@ -12,7 +12,7 @@ void getJ(Satelite sat, String satID) {
    float lat = posArr.getJSONArray(i).getFloat(0)/1000;
    float lon = posArr.getJSONArray(i).getFloat(1)/1000;
    float alt = posArr.getJSONArray(i).getFloat(2)/1000;
-    posList[i] = convert(lat, lon, alt);
+    posList[i] = convert(lat, lon, 6371*scale+alt*scale);
     println(posList[i],alt);
     sat.alt = alt;
     sat.lat = lat;
@@ -22,7 +22,7 @@ void getJ(Satelite sat, String satID) {
 }
 
 PVector convert(float lat, float lon, float h ) {
-  float theta = lat;
+  float theta = lat;//-radians(10);
   float phi = lon + PI;
 
   // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
