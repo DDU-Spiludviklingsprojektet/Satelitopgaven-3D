@@ -22,14 +22,9 @@ String sat_input;
 
 
 void setup () {
- // sat_input = new UiBooster().showTextInputDialog("Hvilke satteliter vil du tracke: (satelit id)");
- // String[] sat_arr = sat_input.split(", ");
-  
-  //printArray(sat_arr);
-
   scale =0.01*width/1920; //
-
-//Setup for can and progress bar
+  
+  //Setup for can and progress bar
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
   dialog.setProgress(10);
   dialog.setMessage("Loading cam");
@@ -38,33 +33,31 @@ void setup () {
   cam.setMaximumDistance(3000);
   fullScreen (P3D);
 
-//Loading images
+  //Loading images
   dialog.setProgress(40);
   dialog.setMessage("Loading Images");
   Space = loadImage ("data/Space.jpg");
   earth = loadImage("data/earth.jpg" );
-
-
   dialog.setProgress(70);
   dialog.setMessage("Loading shapes");
-//setup for globe
+  
+  //setup for globe
   globe = createShape (SPHERE, 6371*scale);
   globe.setTexture (earth);
   globe.setStroke (false);
-//Setup for space
+
+  //Setup for space
   space = createShape (SPHERE, 4000);
   space.setTexture (Space);
   space.setStroke (false);
 
-
-//Setup for satelite
+  //Setup for satelite
   dialog.setProgress(90);
   dialog.setMessage("Loading satelites");
   sat1 = new Satelite("25544", scale);
   sat2 = new Satelite("36516",scale);
 
-
-//Progress bar done
+  //Progress bar done
   dialog.setProgress(100);
   dialog.setMessage("Ready");
   delay(1000);
@@ -82,29 +75,23 @@ void draw() {
   //draws the satelites and the trajectory
   sat1.drawSat(); //cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260
   sat2.drawSat();
-
   animeTest += 0.001;
 
   //draws the GUI with the information about the satelites
   cam.beginHUD();
-
   fill(64, 64, 64);
   stroke (128, 128, 128);
-  rect (15, 12, 200, 90, 20, 20, 20, 20);
-
+  rect (15, 12, 330, 90, 20);
   noStroke();
   textSize(40);
-
   fill(sat1.satColor);
   rect (30, 27, 20, 20);
   fill (255, 255, 255);
-  text (sat1.ID, 60, 50);
-
+  text (sat1.satName, 60, 50);
   fill(sat2.satColor);
   rect (30, 67, 20, 20);
   fill (255, 255, 255);
-  text (sat2.ID, 60, 90);
-
+  text (sat2.satName, 60, 90);
   cam.endHUD();
   
 

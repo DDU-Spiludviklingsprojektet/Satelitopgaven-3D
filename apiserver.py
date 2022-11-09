@@ -1,3 +1,9 @@
+# This is our api for the sattelite position. It gets a sattelite ID,
+# For this sattelite ID, it requests the TLE from a third party, which is returned
+# And then is translated to the data we need.
+# You can try the api with http://104.248.161.215/api/[sat_ID]
+# The data will be returned as JSON in the following form:
+# {"Name":"SPACE STATION","pos":[[-2.9853627681732178,0.6869940161705017,418941.96875],[-2.921661853790283,0.6454346179962158,418755.125]]}
 # encoding: utf-8
 # importing a lot of stuff, python things
 from flask import Flask, jsonify, request
@@ -54,3 +60,5 @@ def post(id):
     return jsonify(data)
 
 app.run(host="0.0.0.0", port=5000)
+
+#Now you may be asking, why did you make this API, it does excatly the same as you could with N2YO. We have been thinking the same. But we originally created it since it would allow us to customise and get data in ways you couldn't get with N2YO. But due to time constraints we had to limit the scope, and all of the "extra" ideas were scrapped. Still it allows for some cool features, such as custom time intervals between each position, that you cant do with N2YO.
