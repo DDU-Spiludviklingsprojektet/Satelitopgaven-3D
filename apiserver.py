@@ -6,7 +6,7 @@ from datetime import datetime
 import datetime as dt
 
 def calculate(satnumber):
-    with urllib.request.urlopen("https://api.n2yo.com/rest/v1/satellite/tle/"+satnumber+"&apiKey=M9GF6D-XSLVGS-LZ2YYR-4Y5P") as url:
+    with urllib.request.urlopen("https://api.n2yo.com/rest/v1/satellite/tle/"+str(satnumber)+"&apiKey=M9GF6D-XSLVGS-LZ2YYR-4Y5P") as url:
         data = json.load(url)
     name = data["info"]["satname"]
     g = data["tle"].split("\n")
@@ -15,8 +15,6 @@ def calculate(satnumber):
 
     tle_rec = ephem.readtle(name, line1, line2);
     tle_rec.compute();
-    print(name);
-    #print(tle_rec.sublong, tle_rec.sublat);
 
     start_dt = dt.datetime.now()
     intervall = dt.timedelta(minutes=1)
@@ -26,6 +24,7 @@ def calculate(satnumber):
         timelist.append(start_dt + i*intervall)
 
     positions = []
+    positions.append(name)
     for t in timelist:
         tle_rec.compute(t)
         positions.append((tle_rec.sublong,tle_rec.sublat,tle_rec.elevation))
@@ -34,17 +33,13 @@ def calculate(satnumber):
 
 
 app = Flask(__name__)
-print(calculate(100))
 
 @app.route('/api/<id>', methods=['GET'])
 def post(id):
     idList = id.split("-")
-    print(idList)
     data = {}
     for x in idList:
-        print(x)
         data[x] = calculate(x)
-    print(data)
     return jsonify(data)
 
 
