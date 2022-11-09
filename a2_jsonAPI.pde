@@ -44,13 +44,26 @@ void getJ(Satelite sat, String satID) {
   JSONObject info = json.getJSONObject("info");
   sat.satName = info.getString("satname");
   JSONArray posArr = json.getJSONArray("positions");
-  Position[] posList = new Position[posArr.size()];
-  
-  for (int i = 0; i < posArr.size(); i++) {
+  //Position[] posList = new Position[posArr.size()];
+  PVector[] posList = new PVector[2];
+  for (int i = 0; i < 2; i++) {
     JSONObject jPos = posArr.getJSONObject(i);
-    Position pos = new Position(jPos);
-    posList[i] = pos;
+     sat.alt = jPos.getFloat("sataltitude");
+    posList[i] = convert(jPos.getFloat("satlatitude"),jPos.getFloat("sataltitude"),jPos.getFloat("satlongitude"));
   }
   
   sat.posList = posList;
+}
+
+PVector convert(float lat, float lon, float h ) {
+  float theta = lat;
+  float phi = lon + PI;
+
+  // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
+  float x = h * cos(theta) * cos(phi);
+  float y = -h * sin(theta);
+  float z = -h * cos(theta) * sin(phi);
+
+  return new PVector(x, y, z);
+
 }

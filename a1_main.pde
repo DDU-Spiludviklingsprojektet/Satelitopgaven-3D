@@ -17,6 +17,7 @@ PShape space;
 PImage earth;
 PImage Space;
 float animeTest = 0; // test variabel
+float scale;
 String sat_input;
 
 
@@ -43,6 +44,10 @@ void setup () {
   dialog.setProgress(70);
   dialog.setMessage("Loading shapes");
   globe = createShape (SPHERE, 230);
+
+  scale =  (width/20)/(6.371*1000000); //pixel/km
+
+  globe = createShape (SPHERE, scale*(6.371*1000000));
   globe.setTexture (earth);
   globe.setStroke (false);
 
@@ -70,8 +75,8 @@ void draw() {
   popMatrix();
 
   //draws the satelites and the trajectory
-  sat1.drawSat(cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260);
-  sat2.drawSat(cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260);
+  sat1.drawSat(); //cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260
+  sat2.drawSat();
 
   animeTest += 0.001;
 
