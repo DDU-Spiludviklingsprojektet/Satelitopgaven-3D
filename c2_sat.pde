@@ -1,31 +1,41 @@
 class Satelite {
-  Position[] posList;
+  PVector[] posList;
   String satName;
   String ID;
-  float avgIncLat;
-  float avgIncLon;
   color satColor;
   float rotZ;
   float rotX;
+  float scale;
+  float alt;
 
-  Satelite(String satID, float rotX, float rotZ)
+  Satelite(String satID,float scale)
   {
     this.ID = satID;
     getJ(this, satID);
     satColor = color(random(70,200),random(70,200),random(70,200));
-    this.rotX = rotX;
-    this.rotZ = rotZ;
+    this.scale = scale;
+    calcRot();
   }
 
-  void drawSat(float x, float y, float z){
+void calcRot(){
+  PVector diff = PVector.sub(posList[1],posList[0]);
+  this.rotZ = atan(diff.y/diff.x);
+  this.rotX = -1 *atan(diff.y/diff.x); 
+  
+}
+
+
+  void drawSat(){
   
     pushMatrix();
     stroke(satColor);
-     rotateZ(rotZ);
-     rotateX(rotX);
+     //rotateZ(rotZ);
+     //rotateX(rotX);
    
 
-    translate(x,y,z);
+    //translate(posList[0].x*0.5*scale+scale,posList[0].y*0.5*scale+scale,posList[0].z*0.5*scale+scale);
+    
+    //translate(,alt*scale,alt);
 
     fill(255);
     box(10);
@@ -45,8 +55,8 @@ class Satelite {
         noFill();
         
         strokeWeight(6);
-        for(int i = 1; i< 24; i++) {
-            curveVertex((230 + 30) * sin(0.1*PI*i), 0, (230+30) * cos(0.1*PI*i));
+        for(int i = 1; i< 24; i++) { // this.scale*10 + 
+            curveVertex((alt*scale+scale*(6.371*1000000)) * sin(0.1*PI*i), 0, (alt*scale+scale*(6.371*1000000)) * cos(0.1*PI*i));
         }
         endShape();
 

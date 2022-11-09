@@ -17,7 +17,7 @@ PShape space;
 PImage earth;
 PImage Space;
 float animeTest; // test variabel
-
+float scale;
 
 void setup () {
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
@@ -34,7 +34,10 @@ void setup () {
   Space = loadImage ("data/Space.jpg");
   earth = loadImage("data/earth.jpg" );
 
-  globe = createShape (SPHERE, 230);
+
+  scale =  (width/20)/(6.371*1000000); //pixel/km
+
+  globe = createShape (SPHERE, scale*(6.371*1000000));
   globe.setTexture (earth);
   globe.setStroke (false);
 
@@ -44,8 +47,8 @@ void setup () {
   space.setStroke (false);
 
 
-  sat1 = new Satelite("25544", PI/8, PI/6);
-  sat2 = new Satelite("36516", PI, PI);
+  sat1 = new Satelite("25544",scale);
+  sat2 = new Satelite("36516",scale);
 
   delay(1000);
 
@@ -67,8 +70,8 @@ void draw() {
   popMatrix();
 
   //draws the satelites and the trajectory
-  sat1.drawSat(cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260);
-  sat2.drawSat(cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260);
+  sat1.drawSat(); //cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260
+  sat2.drawSat();
 
   animeTest += 0.001;
 

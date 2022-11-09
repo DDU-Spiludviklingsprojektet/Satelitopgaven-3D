@@ -6,6 +6,6 @@ class Position {
   Position(JSONObject json) {
     this.lat = json.getFloat("satlatitude");
     this.lon = json.getFloat("satlongitude");
-    //this.elevation = json.getFloat("elevation");
+    this.elevation = json.getFloat("elevation");
   }
 }
