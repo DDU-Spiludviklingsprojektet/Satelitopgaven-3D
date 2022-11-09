@@ -19,10 +19,22 @@ PImage Space;
 float animeTest = 0; // test variabel
 float scale;
 String sat_input;
-
+String[] satIDArr;
+Satelite[] satArr;
 
 void setup () {
   scale =0.01*width/1920; //
+
+satIDArr = new String[2];
+satIDArr[0] = "25544";
+satIDArr[1] = "36516";
+  
+  satArr = new Satelite[2];
+  
+  for (int i = 0; i < satIDArr.length; i++){
+    satArr[i] = new Satelite(satIDArr[i],scale);
+  }
+  
   
   //Setup for can and progress bar
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
@@ -53,9 +65,8 @@ void setup () {
 
   //Setup for satelite
   dialog.setProgress(90);
-  dialog.setMessage("Loading satelites");
-  sat1 = new Satelite("25544", scale);
-  sat2 = new Satelite("36516",scale);
+  
+  
 
   //Progress bar done
   dialog.setProgress(100);
@@ -73,28 +84,35 @@ void draw() {
   popMatrix();
 
   //draws the satelites and the trajectory
-  sat1.drawSat(); //cos(PI*animeTest)*260, 0, sin(PI*animeTest)*260
-  sat2.drawSat();
-  animeTest += 0.001;
+  for (Satelite sat : satArr){
+    sat.drawSat();
+  }
 
   //draws the GUI with the information about the satelites
   cam.beginHUD();
   fill(64, 64, 64);
   stroke (128, 128, 128);
-  rect (15, 12, 330, 90, 20);
+  rect (15, 12, 160*satArr.length, 90, 20);
   noStroke();
   textSize(40);
-  fill(sat1.satColor);
-  rect (30, 27, 20, 20);
+  for ( int i = 0; i < satArr.length; i++){
+    fill(satArr[i].satColor);
+  rect (30, 27*(i+1), 20, 20);
   fill (255, 255, 255);
-  text (sat1.satName, 60, 50);
+  text (satArr[i].satName, 60, 50+40*i);
+    
+  }
+   cam.endHUD();
+  
+  
+  /*
   fill(sat2.satColor);
   rect (30, 67, 20, 20);
   fill (255, 255, 255);
   text (sat2.satName, 60, 90);
-  cam.endHUD();
+ */
   
-
+    // Ekvator
    beginShape();
         noFill();
         stroke(255);

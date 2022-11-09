@@ -10,6 +10,7 @@ class Satelite {
   float lat;
   float lon;
   float rotY;
+  float animeTest;
 
   Satelite(String satID,float scale)
   {
