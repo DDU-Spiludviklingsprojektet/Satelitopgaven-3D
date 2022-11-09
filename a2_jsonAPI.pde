@@ -13,18 +13,17 @@ void getJ(Satelite sat, String satID) {
   sat.satName = json.getString("Name");
   JSONArray posArr = json.getJSONArray("pos");
   PVector[] posList = new PVector[2];
-  for(int i = 0; i<posArr.size(); i++) {
-   float lat = posArr.getJSONArray(i).getFloat(0)/1000;
-   float lon = posArr.getJSONArray(i).getFloat(1)/1000;
-   float alt = posArr.getJSONArray(i).getFloat(2)/1000;
+  for (int i = 0; i<posArr.size(); i++) {
+    float lat = posArr.getJSONArray(i).getFloat(0)/1000;
+    float lon = posArr.getJSONArray(i).getFloat(1)/1000;
+    float alt = posArr.getJSONArray(i).getFloat(2)/1000;
     posList[i] = convert(lat, lon, 6371*scale+alt*scale);
     sat.alt = alt;
-    
   }
   sat.posList = posList;
 }
 
-//Creates a PVector with the array of the data, to make it easier to modify the data. 
+//Creates a PVector with the array of the data, to make it easier to modify the data.
 PVector convert(float lat, float lon, float h ) {
   float theta = lat;//-radians(10);
   float phi = lon + PI;
@@ -33,6 +32,6 @@ PVector convert(float lat, float lon, float h ) {
   float x = h * cos(theta) * cos(phi);
   float y = -h * sin(theta);
   float z = -h * cos(theta) * sin(phi);
-  
+
   return new PVector(x, y, z);
 }

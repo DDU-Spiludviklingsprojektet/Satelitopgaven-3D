@@ -22,19 +22,22 @@ String[] satIDArr;
 Satelite[] satArr;
 
 void setup () {
+  
+  sat_input = new UiBooster().showTextInputDialog("What do you think?");
+  satIDArr = sat_input.split(",");
+  printArray(satIDArr);
+  println(satIDArr.length);
+  
+  
   scale = 0.01*width/1920; // skalaen, afhænger af skærmstørrelse
+  
 
-satIDArr = new String[2];
-satIDArr[0] = "25544";
-satIDArr[1] = "36516";
-  
-  satArr = new Satelite[2]; // laver en ny satelit for hvert ID.
-  
-  for (int i = 0; i < satIDArr.length; i++){
-    satArr[i] = new Satelite(satIDArr[i],scale);
+  satArr = new Satelite[satIDArr.length]; // laver en ny satelit for hvert ID.
+  for (int i = 0; i < satIDArr.length; i++) {
+    satArr[i] = new Satelite(satIDArr[i], scale);
   }
-  
-  
+
+
   //Setup for can and progress bar
   ProgressDialog dialog = new UiBooster().showProgressDialog("Please wait", "Waiting", 0, 100);
   dialog.setProgress(10);
@@ -51,7 +54,7 @@ satIDArr[1] = "36516";
   earth = loadImage("data/earth.jpg" );
   dialog.setProgress(70);
   dialog.setMessage("Loading shapes");
-  
+
   //setup for globe
   globe = createShape (SPHERE, 6371*scale);
   globe.setTexture (earth);
@@ -64,8 +67,8 @@ satIDArr[1] = "36516";
 
   //Setup for satelite
   dialog.setProgress(90);
-  
-  
+
+
 
   //Progress bar done
   dialog.setProgress(100);
@@ -83,7 +86,7 @@ void draw() {
   popMatrix();
 
   //draws the satelites and the trajectory
-  for (Satelite sat : satArr){
+  for (Satelite sat : satArr) {
     sat.drawSat();
   }
 
@@ -94,26 +97,22 @@ void draw() {
   rect (15, 12, 160*satArr.length, 90, 20);
   noStroke();
   textSize(40);
-  for ( int i = 0; i < satArr.length; i++){
+  for ( int i = 0; i < satArr.length; i++) {
     fill(satArr[i].satColor);
-  rect (30, 27*(i+1), 20, 20);
-  fill (255, 255, 255);
-  text (satArr[i].satName, 60, 50+40*i);
-    
+    rect (30, 27*(i+1), 20, 20);
+    fill (255, 255, 255);
+    text (satArr[i].satName, 60, 50+40*i);
   }
-   cam.endHUD();
+  cam.endHUD();
 
-  
-    // ækvator
-   beginShape();
-        noFill();
-        stroke(255);
-        strokeWeight(3);
-        for(int i = 1; i< 24; i++) { 
-            curveVertex((430+6371)*scale * sin(0.1*PI*i), 0, (430+(6371))*scale * cos(0.1*PI*i));
-        }
-        endShape();
 
-  
-  
+  // ækvator
+  beginShape();
+  noFill();
+  stroke(255);
+  strokeWeight(3);
+  for (int i = 1; i< 24; i++) {
+    curveVertex((430+6371)*scale * sin(0.1*PI*i), 0, (430+(6371))*scale * cos(0.1*PI*i));
+  }
+  endShape();
 }
