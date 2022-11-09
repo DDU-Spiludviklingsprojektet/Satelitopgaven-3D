@@ -94,12 +94,12 @@ void draw() {
   cam.beginHUD();
   fill(64, 64, 64);
   stroke (128, 128, 128);
-  rect (15, 12, 160*satArr.length, 90, 20);
+  rect (15, 12, 350, (43*satArr.length), 20);
   noStroke();
   textSize(40);
   for ( int i = 0; i < satArr.length; i++) {
     fill(satArr[i].satColor);
-    rect (30, 27*(i+1), 20, 20);
+    rect (30,(27+40*i) , 20, 20); //27*(i+1)
     fill (255, 255, 255);
     text (satArr[i].satName, 60, 50+40*i);
   }
