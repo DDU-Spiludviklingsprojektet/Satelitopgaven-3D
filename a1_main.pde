@@ -23,7 +23,7 @@ Satelite[] satArr;
 
 void setup () {
   
-  sat_input = new UiBooster().showTextInputDialog("What do you think?");
+  sat_input = new UiBooster().showTextInputDialog("Enter Satellite ID, remember to separate them with a -");
   satIDArr = sat_input.split(",");
   printArray(satIDArr);
   println(satIDArr.length);
